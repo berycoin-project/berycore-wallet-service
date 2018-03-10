@@ -12,7 +12,7 @@ log.level = 'info';
 
 var Bitcore = require('berycore-lib');
 var Bitcore_ = {
-  btc: Bitcore,
+  bery: Bitcore,
   bch: require('bitcore-lib-cash')
 };
 
@@ -1257,7 +1257,7 @@ describe('Wallet service', function() {
           address.network.should.equal('livenet');
           address.address.should.equal('36q2G5FMGvJbPgAVEaiyAsFGmpkhPKwk2r');
           address.isChange.should.be.false;
-          address.coin.should.equal('btc');
+          address.coin.should.equal('bery');
           address.path.should.equal('m/0/0');
           address.type.should.equal('P2SH');
           server.getNotifications({}, function(err, notifications) {
@@ -1382,7 +1382,7 @@ describe('Wallet service', function() {
         helpers.createAndJoinWallet(1, 1, function(s, w) {
           server = s;
           wallet = w;
-          w.copayers[0].id.should.equal(TestData.copayers[0].id44btc);
+          w.copayers[0].id.should.equal(TestData.copayers[0].id44bery);
           done();
         });
       });
@@ -1761,7 +1761,7 @@ describe('Wallet service', function() {
       var requestPubKeyStr = requestPubKey.toString();
       var sig = helpers.signRequestPubKey(requestPubKeyStr, xPrivKey);
 
-      var copayerId = Model.Copayer._xPubToCopayerId('btc', TestData.copayers[0].xPubKey_44H_0H_0H);
+      var copayerId = Model.Copayer._xPubToCopayerId('bery', TestData.copayers[0].xPubKey_44H_0H_0H);
       opts = {
         copayerId: copayerId,
         requestPubKey: requestPubKeyStr,
@@ -2755,7 +2755,7 @@ describe('Wallet service', function() {
     before(function() {
       levels = Defaults.FEE_LEVELS;
       Defaults.FEE_LEVELS = {
-        btc: [{
+        bery: [{
           name: 'urgent',
           nbBlocks: 1,
           multiplier: 1.5,
@@ -2833,7 +2833,7 @@ describe('Wallet service', function() {
         fees = _.zipObject(_.map(fees, function(item) {
           return [item.level, item.feePerKb];
         }));
-        var defaults = _.zipObject(_.map(Defaults.FEE_LEVELS['btc'], function(item) {
+        var defaults = _.zipObject(_.map(Defaults.FEE_LEVELS['bery'], function(item) {
           return [item.name, item.defaultValue];
         }));
         fees.priority.should.equal(defaults.priority);
@@ -2896,7 +2896,7 @@ describe('Wallet service', function() {
       });
     });
     it('should get monotonically decreasing fee values', function(done) {
-      _.find(Defaults.FEE_LEVELS['btc'], {
+      _.find(Defaults.FEE_LEVELS['bery'], {
         nbBlocks: 6
       }).defaultValue.should.equal(25000);
       helpers.stubFeeLevels({
@@ -3077,16 +3077,16 @@ describe('Wallet service', function() {
   });
 
   var addrMap = {
-    btc: '18PzpUFkFZE8zKWUPvfykkTxmB9oMR8qP7',
+    bery: '18PzpUFkFZE8zKWUPvfykkTxmB9oMR8qP7',
     bch: 'CPrtPWbp8cCftTQu5fzuLG5zPJNDHMMf8X',
   }
 
   var idKeyMap = {
-      btc: 'id44btc',
+      bery: 'id44bery',
       bch: 'id44bch',
   };
 
-  _.each(['bch', 'btc'], function(coin) {
+  _.each(['bch', 'bery'], function(coin) {
   
     describe('#createTx ' + coin, function() {
       var addressStr, idKey;
@@ -3671,8 +3671,8 @@ describe('Wallet service', function() {
         describe('Fee levels', function() {
           it('should create a tx specifying feeLevel', function(done) {
             //ToDo
-            var level = wallet.coin == 'btc' ? 'economy' : 'normal';
-            var expected = wallet.coin == 'btc' ? 180e2 : 200e2;
+            var level = wallet.coin == 'bery' ? 'economy' : 'normal';
+            var expected = wallet.coin == 'bery' ? 180e2 : 200e2;
             helpers.stubFeeLevels({
               1: 400e2,
               2: 200e2,
@@ -4517,7 +4517,7 @@ describe('Wallet service', function() {
         });
       });
       it('should select unconfirmed utxos if not enough confirmed utxos', function(done) {
-        helpers.stubUtxos(server, wallet, ['u 1btc', '0.5btc'], function() {
+        helpers.stubUtxos(server, wallet, ['u 1bery', '0.5bery'], function() {
           var txOpts = {
             outputs: [{
               toAddress: '18PzpUFkFZE8zKWUPvfykkTxmB9oMR8qP7',
@@ -7366,7 +7366,7 @@ describe('Wallet service', function() {
 
           blockchainExplorer.getBlockchainHeight = sinon.stub().callsArgWith(0, null, 2000);
           server._notify('NewBlock', {
-            coin: 'btc',
+            coin: 'bery',
             network: 'livenet',
             hash: 'dummy hash',
           }, {
@@ -8369,7 +8369,7 @@ describe('Wallet service', function() {
       });
     });
     it('should get wallet from tx proposal', function(done) {
-      helpers.stubUtxos(server, wallet, '1 btc', function() {
+      helpers.stubUtxos(server, wallet, '1 bery', function() {
         helpers.stubBroadcast();
         var txOpts = {
           outputs: [{
@@ -8437,14 +8437,14 @@ describe('Wallet service', function() {
     });
   });
 
-  describe('BTC & BCH wallets with same seed', function() {
+  describe('BERY & BCH wallets with same seed', function() {
     var server = {},
       wallet = {};
     beforeEach(function(done) {
       helpers.createAndJoinWallet(1, 1, function(s, w) {
-        server.btc = s;
-        wallet.btc = w;
-        w.copayers[0].id.should.equal(TestData.copayers[0].id44btc);
+        server.bery = s;
+        wallet.bery = w;
+        w.copayers[0].id.should.equal(TestData.copayers[0].id44bery);
         helpers.createAndJoinWallet(1, 1, {
           coin: 'bch'
         }, function(s, w) {
@@ -8457,11 +8457,11 @@ describe('Wallet service', function() {
     });
 
     it('should create address', function(done) {
-      server.btc.createAddress({}, function(err, address) {
+      server.bery.createAddress({}, function(err, address) {
         should.not.exist(err);
         should.exist(address);
-        address.walletId.should.equal(wallet.btc.id);
-        address.coin.should.equal('btc');
+        address.walletId.should.equal(wallet.bery.id);
+        address.coin.should.equal('bery');
         address.network.should.equal('livenet');
         address.address.should.equal('1L3z9LPd861FWQhf3vDn89Fnc9dkdBo2CG');
         server.bch.createAddress({}, function(err, address) {
@@ -8471,11 +8471,11 @@ describe('Wallet service', function() {
           address.coin.should.equal('bch');
           address.network.should.equal('livenet');
           address.address.should.equal('CbWsiNjh18ynQYc5jfYhhespEGrAaW8YUq');
-          server.btc.getMainAddresses({}, function(err, addresses) {
+          server.bery.getMainAddresses({}, function(err, addresses) {
             should.not.exist(err);
             addresses.length.should.equal(1);
-            addresses[0].coin.should.equal('btc');
-            addresses[0].walletId.should.equal(wallet.btc.id);
+            addresses[0].coin.should.equal('bery');
+            addresses[0].walletId.should.equal(wallet.bery.id);
             addresses[0].address.should.equal('1L3z9LPd861FWQhf3vDn89Fnc9dkdBo2CG');
             server.bch.getMainAddresses({}, function(err, addresses) {
               should.not.exist(err);

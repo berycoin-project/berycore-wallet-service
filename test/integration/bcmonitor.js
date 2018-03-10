@@ -48,7 +48,7 @@ describe('Blockchain monitor', function() {
           messageBroker: server.messageBroker,
           storage: storage,
           blockchainExplorers: {
-            'btc': {
+            'bery': {
               'testnet': blockchainExplorer,
               'livenet': blockchainExplorer
             }

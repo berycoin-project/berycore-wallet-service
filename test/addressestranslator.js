@@ -8,11 +8,11 @@ var should = chai.should;
 var AddressTranslator = require('../lib/addresstranslator');
 
 describe('#AddressTranslator', function() {
-  it('should translate address from btc to bch', function() {
+  it('should translate address from bery to bch', function() {
     var res = AddressTranslator.translate('1LqBGSKuX5yYUonjxT5qGfpUsXKYYWeabA', 'bch');
     assert( res == 'CcJ4qUfyQ8x5NwhAeCQkrBSWVeXxXghcNz');
   });
-  it('should translate address from bch to btc', function() {
+  it('should translate address from bch to bery', function() {
     var res = AddressTranslator.translateInput('HBf8isgS8EXG1r3X6GP89FmooUmiJ42wHS');
     assert(res=='36q2G5FMGvJbPgAVEaiyAsFGmpkhPKwk2r');
   });
@@ -21,22 +21,22 @@ describe('#AddressTranslator', function() {
     var res = AddressTranslator.translate('CcJ4qUfyQ8x5NwhAeCQkrBSWVeXxXghcNz', 'bch');
     assert(res=='CcJ4qUfyQ8x5NwhAeCQkrBSWVeXxXghcNz');
   });
-  it('should keep the address if there is nothing to do (btc)', function() {
-    var res = AddressTranslator.translate('1LqBGSKuX5yYUonjxT5qGfpUsXKYYWeabA', 'btc');
+  it('should keep the address if there is nothing to do (bery)', function() {
+    var res = AddressTranslator.translate('1LqBGSKuX5yYUonjxT5qGfpUsXKYYWeabA', 'bery');
     assert(res=='1LqBGSKuX5yYUonjxT5qGfpUsXKYYWeabA');
   });
   it('should support 3 params NOK', function() {
 
     var a;
     try {
-      var res = AddressTranslator.translate('1LqBGSKuX5yYUonjxT5qGfpUsXKYYWeabA', 'btc', 'bch');
+      var res = AddressTranslator.translate('1LqBGSKuX5yYUonjxT5qGfpUsXKYYWeabA', 'bery', 'bch');
     } catch (e) {
       a=e.toString();
       assert(a.match(/Address has mismatched network type/));
     };
   });
   it('should support 3 params OK', function() {
-    var res = AddressTranslator.translate('HBf8isgS8EXG1r3X6GP89FmooUmiJ42wHS', 'btc', 'bch');
+    var res = AddressTranslator.translate('HBf8isgS8EXG1r3X6GP89FmooUmiJ42wHS', 'bery', 'bch');
     assert(res=='36q2G5FMGvJbPgAVEaiyAsFGmpkhPKwk2r');
   });
 

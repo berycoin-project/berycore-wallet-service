@@ -85,7 +85,7 @@ describe('Utils', function() {
         args: [1, 'bit'],
         expected: '0',
       }, {
-        args: [1, 'btc'],
+        args: [1, 'bery'],
         expected: '0.00',
       }, {
         args: [0, 'bit'],
@@ -94,19 +94,19 @@ describe('Utils', function() {
         args: [12345678, 'bit'],
         expected: '123,457',
       }, {
-        args: [12345678, 'btc'],
+        args: [12345678, 'bery'],
         expected: '0.123457',
       }, {
-        args: [12345611, 'btc'],
+        args: [12345611, 'bery'],
         expected: '0.123456',
       }, {
-        args: [1234, 'btc'],
+        args: [1234, 'bery'],
         expected: '0.000012',
       }, {
-        args: [1299, 'btc'],
+        args: [1299, 'bery'],
         expected: '0.000013',
       }, {
-        args: [1234567899999, 'btc'],
+        args: [1234567899999, 'bery'],
         expected: '12,345.679',
       }, {
         args: [12345678, 'bit', {
@@ -114,12 +114,12 @@ describe('Utils', function() {
         }],
         expected: '123.457',
       }, {
-        args: [12345678, 'btc', {
+        args: [12345678, 'bery', {
           decimalSeparator: ','
         }],
         expected: '0,123457',
       }, {
-        args: [1234567899999, 'btc', {
+        args: [1234567899999, 'bery', {
           thousandsSeparator: ' ',
           decimalSeparator: ','
         }],
@@ -133,8 +133,8 @@ describe('Utils', function() {
   });
 
   describe('#getAddressCoin', function() {
-    it('should identify btc as coin for 1LqBGSKuX5yYUonjxT5qGfpUsXKYYWeabA', function() {
-      Utils.getAddressCoin('1LqBGSKuX5yYUonjxT5qGfpUsXKYYWeabA').should.equal('btc');
+    it('should identify bery as coin for 1LqBGSKuX5yYUonjxT5qGfpUsXKYYWeabA', function() {
+      Utils.getAddressCoin('1LqBGSKuX5yYUonjxT5qGfpUsXKYYWeabA').should.equal('bery');
     });
     it('should identify bch as coin for CcJ4qUfyQ8x5NwhAeCQkrBSWVeXxXghcNz', function() {
       Utils.getAddressCoin('CcJ4qUfyQ8x5NwhAeCQkrBSWVeXxXghcNz').should.equal('bch');
@@ -146,12 +146,12 @@ describe('Utils', function() {
  
 
   describe('#translateAddress', function() {
-    it('should translate address from btc to bch', function() {
+    it('should translate address from bery to bch', function() {
       var res = Utils.translateAddress('1LqBGSKuX5yYUonjxT5qGfpUsXKYYWeabA', 'bch');
       res.should.equal('CcJ4qUfyQ8x5NwhAeCQkrBSWVeXxXghcNz');
     });
-    it('should translate address from bch to btc', function() {
-      var res = Utils.translateAddress('HBf8isgS8EXG1r3X6GP89FmooUmiJ42wHS', 'btc');
+    it('should translate address from bch to bery', function() {
+      var res = Utils.translateAddress('HBf8isgS8EXG1r3X6GP89FmooUmiJ42wHS', 'bery');
       res.should.equal('36q2G5FMGvJbPgAVEaiyAsFGmpkhPKwk2r');
     });
  
@@ -159,8 +159,8 @@ describe('Utils', function() {
       var res = Utils.translateAddress('CcJ4qUfyQ8x5NwhAeCQkrBSWVeXxXghcNz', 'bch');
       res.should.equal('CcJ4qUfyQ8x5NwhAeCQkrBSWVeXxXghcNz');
     });
-    it('should keep the address if there is nothing to do (btc)', function() {
-      var res = Utils.translateAddress('1LqBGSKuX5yYUonjxT5qGfpUsXKYYWeabA', 'btc');
+    it('should keep the address if there is nothing to do (bery)', function() {
+      var res = Utils.translateAddress('1LqBGSKuX5yYUonjxT5qGfpUsXKYYWeabA', 'bery');
       should.exist(res);
       res.should.equal('1LqBGSKuX5yYUonjxT5qGfpUsXKYYWeabA');
     });

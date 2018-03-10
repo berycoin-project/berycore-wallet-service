@@ -24,10 +24,10 @@ describe('TxProposal', function() {
       should.exist(txp);
       txp.amount.should.equal(aTXP().amount);
     });
-    it('should default to BTC coin', function() {
+    it('should default to BERY coin', function() {
       var txp = TxProposal.fromObj(aTXP());
       should.exist(txp);
-      txp.coin.should.equal('btc');
+      txp.coin.should.equal('bery');
     });
   });
 
@@ -115,7 +115,7 @@ var theRawTx = '0100000001ab069f7073be9b491bb1ad4233a45d2e383082ccc7206df905662d
 
 var aTxpOpts = function() {
   var opts = {
-    coin: 'btc',
+    coin: 'bery',
     network: 'livenet',
     message: 'some message'
   };

@@ -169,7 +169,7 @@ describe('Email notifications', function() {
             txp = t;
             async.eachSeries(_.range(2), function(i, next) {
               var copayer = TestData.copayers[i];
-              helpers.getAuthServer(copayer.id44btc, function(server) {
+              helpers.getAuthServer(copayer.id44bery, function(server) {
                 var signatures = helpers.clientSign(txp, copayer.xPrivKey_44H_0H_0H);
                 server.signTx({
                   txProposalId: txp.id,
@@ -235,7 +235,7 @@ describe('Email notifications', function() {
             txpId = txp.id;
             async.eachSeries(_.range(1, 3), function(i, next) {
               var copayer = TestData.copayers[i];
-              helpers.getAuthServer(copayer.id44btc, function(server) {
+              helpers.getAuthServer(copayer.id44bery, function(server) {
                 server.rejectTx({
                   txProposalId: txp.id,
                 }, next);
@@ -368,7 +368,7 @@ describe('Email notifications', function() {
       server.savePreferences({
         email: 'copayer1@domain.com',
         language: 'es',
-        unit: 'btc',
+        unit: 'bery',
       }, function(err) {
         server.createAddress({}, function(err, address) {
           should.not.exist(err);
@@ -390,7 +390,7 @@ describe('Email notifications', function() {
               });
               spanish.from.should.equal('bws@dummy.net');
               spanish.subject.should.contain('Nuevo pago recibido');
-              spanish.text.should.contain('0.123 BTC');
+              spanish.text.should.contain('0.123 BERY');
               var english = _.find(emails, {
                 to: 'copayer2@domain.com'
               });
