@@ -41,7 +41,7 @@ var config = {
     bery: {
       livenet: {
         provider: 'insight',
-        url: 'https://insight.bitpay.com:443',
+        url: 'http://beryexplorer.berycoin.com/insight',
       },
       testnet: {
         provider: 'insight',
