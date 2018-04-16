@@ -41,7 +41,7 @@ var config = {
     bery: {
       livenet: {
         provider: 'insight',
-        url: 'http://beryexplorer.berycoin.com/insight',
+        url: 'http://explorer.berycoin.com',
       },
       testnet: {
         provider: 'insight',
